@@ -1,7 +1,11 @@
 import Lottie from "lottie-react";
-import React from "react";
+import React, { useContext } from "react";
 import registerLottieData from "../../assets/Lottiefiles/Animation - 1734550880947.json";
+import { AuthContext } from "../../Provider/AuthProvider";
+import { useNavigate } from "react-router-dom";
 const Register = () => {
+    const {createUser, setUser} = useContext(AuthContext)
+    const navigate = useNavigate()
   const handleRegister = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -12,6 +16,15 @@ const Register = () => {
     if(!passwordRegex.test(password)){
         alert('password should be at least 6 character, and one upper case ')
     }
+
+    createUser(email, password)
+    .then(result => {
+        setUser(result.user)
+        navigate('/')
+    })
+    .catch(error => {
+        console.log(error.message)
+    })
   };
   return (
     <div className="max-w-6xl mx-auto">
