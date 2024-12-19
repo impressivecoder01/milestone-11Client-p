@@ -1,13 +1,26 @@
-import React from "react";
+import React, { useContext } from "react";
 import lottieSingInAnimation from "../../src/assets/LottieLogin/Animation - 1734564332865.json";
 import Lottie from "lottie-react";
+import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../Provider/AuthProvider";
 const SignIn = () => {
+  const navigate = useNavigate()
+  const {singInUser,setUser} = useContext(AuthContext)
   const handleSignIn = (e) => {
     e.preventDefault();
     const from = e.target;
     const email = from.email.value;
     const password = from.password.value;
     console.log(email, password);
+    singInUser(email, password)
+    .then(result => {
+      console.log('signInUser', result.user)
+      setUser(result.user)
+      navigate('/')
+    })
+    .catch(error => {
+      alert( error.message)
+    })
   };
   return (
     <div className="max-w-6xl mx-auto ">
