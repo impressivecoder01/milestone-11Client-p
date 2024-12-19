@@ -4,27 +4,44 @@ import registerLottieData from "../../assets/Lottiefiles/Animation - 17345508809
 import { AuthContext } from "../../Provider/AuthProvider";
 import { useNavigate } from "react-router-dom";
 const Register = () => {
-    const {createUser, setUser} = useContext(AuthContext)
-    const navigate = useNavigate()
+  const { createUser, setUser, updateUserProfile } = useContext(AuthContext);
+  const navigate = useNavigate();
   const handleRegister = (e) => {
     e.preventDefault();
     const form = e.target;
     const email = form.email.value;
+    const name = form.name.value;
+    const photo = form.photo.value;
     const password = form.password.value;
     console.log(email, password);
     const passwordRegex = /^(?=.*[A-Z])(?=.*\d).{6,}$/;
-    if(!passwordRegex.test(password)){
-        alert('password should be at least 6 character, and one upper case ')
+    if (!passwordRegex.test(password)) {
+      alert("password should be at least 6 character, and one upper case ");
     }
 
     createUser(email, password)
-    .then(result => {
-        setUser(result.user)
-        navigate('/')
-    })
-    .catch(error => {
-        console.log(error.message)
-    })
+      .then((result) => {
+        setUser(result.user);
+        updateUserProfile({ displayName: name, photoURL: photo });
+        alert("register successful");
+        navigate("/");
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
+    //   try {
+    //     //2. User Registration
+    //     const result = await createUser(email, pass)
+    //     console.log(result)
+    //     await updateUserProfile(name, photo)
+    //     setUser({ ...result.user, photoURL: photo, displayName: name })
+    //     toast.success('Signup Successful')
+    //     navigate('/')
+    //   } catch (err) {
+    //     console.log(err)
+    //     toast.error(err?.message)
+    //   }
+    // }
   };
   return (
     <div className="max-w-6xl mx-auto">
@@ -38,6 +55,32 @@ const Register = () => {
               Register Now!
             </h1>
             <form onSubmit={handleRegister} className="card-body">
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text">Name</span>
+                </label>
+                <input
+                  type="name"
+                  placeholder="name"
+                  name="name"
+                  className="input input-bordered"
+                  required
+                />
+              </div>
+
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text">Photo</span>
+                </label>
+                <input
+                  type="url"
+                  placeholder="PhotoURL"
+                  name="photo"
+                  className="input input-bordered"
+                  required
+                />
+              </div>
+
               <div className="form-control">
                 <label className="label">
                   <span className="label-text">Email</span>

@@ -3,24 +3,24 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../../Provider/AuthProvider";
 
 const Navbar = () => {
-  const {user, signOutUser} = useContext(AuthContext)
+  const { user, signOutUser } = useContext(AuthContext);
   const handleSignOut = () => {
     signOutUser()
-    .then(()=>{
-      alert('signOut successfully')
-    })
-    .catch(error => {
-      console.log('signOut fail')
-    })
-  }
+      .then(() => {
+        alert("signOut successfully");
+      })
+      .catch((error) => {
+        console.log("signOut fail");
+      });
+  };
   const links = (
     <>
       <li>
         <a>Item 1</a>
       </li>
-<li>
-    <a>Item 2</a>
-</li>
+      <li>
+        <a>Item 2</a>
+      </li>
       <li>
         <a>Item 3</a>
       </li>
@@ -51,31 +51,53 @@ const Navbar = () => {
               tabIndex={0}
               className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
             >
-             {links}
+              {links}
             </ul>
           </div>
           <a className="btn btn-ghost text-xl">daisyUI</a>
         </div>
         <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal px-1">
-            {links}
-          </ul>
+          <ul className="menu menu-horizontal px-1">{links}</ul>
         </div>
         <div className="navbar-end space-x-2">
-        {
-        user? <>
-<button className="btn" onClick={handleSignOut}>SignOut</button>
-        </>
-        :
-        <>
-         <Link className="btn" to='/register'>Register</Link>
-         <Link className="btn" to='/login'>Login</Link>
-        </>
-      }
-           
+          {user ? (
+            <>
+            <div className="dropdown dropdown-end z-50">
+            <div
+              tabIndex={0}
+              role='button'
+              className='btn btn-ghost btn-circle avatar'
+            >
+              <div title={user?.displayName} className='w-10 rounded-full'>
+                <img
+                  referrerPolicy='no-referrer'
+                  alt='User Profile Photo'
+                  src={user?.photoURL}
+                />
+              </div>
+            </div>
+            </div>
+            
+{/*             
+              {user?.displayName}
+              {user?.photoURL} */}
+            
+              <button className="btn" onClick={handleSignOut}>
+                SignOut
+              </button>
+            </>
+          ) : (
+            <>
+              <Link className="btn" to="/register">
+                Register
+              </Link>
+              <Link className="btn" to="/login">
+                Login
+              </Link>
+            </>
+          )}
         </div>
       </div>
-      
     </div>
   );
 };
