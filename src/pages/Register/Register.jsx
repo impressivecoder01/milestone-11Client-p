@@ -25,6 +25,7 @@ const Register = () => {
         updateUserProfile({ displayName: name, photoURL: photo });
         alert("register successful");
         navigate("/");
+        from.reset()
       })
       .catch((error) => {
         console.log(error.message);

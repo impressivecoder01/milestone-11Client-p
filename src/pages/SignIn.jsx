@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../Provider/AuthProvider";
 const SignIn = () => {
   const navigate = useNavigate()
-  const {singInUser,setUser} = useContext(AuthContext)
+  const {singInUser,setUser,socialLogin} = useContext(AuthContext)
   const handleSignIn = (e) => {
     e.preventDefault();
     const from = e.target;
@@ -17,11 +17,24 @@ const SignIn = () => {
       console.log('signInUser', result.user)
       setUser(result.user)
       navigate('/')
+      from.reset()
     })
     .catch(error => {
       alert( error.message)
     })
+    
   };
+  const handleSocialSignIn = () => {
+    socialLogin()
+    .then(result => {
+      setUser(result.user)
+      navigate('/')
+    })
+    .catch(error => {
+      console.log(error)
+      alert('error happened')
+    })
+  }
   return (
     <div className="max-w-6xl mx-auto ">
       <div className="hero bg-base-200 ">
@@ -67,6 +80,9 @@ const SignIn = () => {
                   <button className="btn btn-primary">Login</button>
                 </div>
               </form>
+              <div className="pb-3">
+                <button onClick={handleSocialSignIn} className="btn btn-warning">Google SignIn</button>
+              </div>
             </div>
           </div>
         </div>
