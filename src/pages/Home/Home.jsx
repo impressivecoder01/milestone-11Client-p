@@ -1,5 +1,6 @@
 import React from 'react';
 import Navbar from '../shared/Navbar';
+import Footer from '../shared/Footer';
 
 const Home = () => {
     return (
@@ -12,6 +13,9 @@ const Home = () => {
             <h1>this is home</h1>
 
             </main>
+            <footer>
+                <Footer></Footer>
+            </footer>
         </div>
     );
 };
