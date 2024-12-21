@@ -28,6 +28,7 @@ const JobDetails = () => {
             {company} <br />
             {/* {requirements} */}
             {/* {} */}
+            <button className='btn btn-primary'>Apply Now</button>
         </div>
     );
 };

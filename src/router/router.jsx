@@ -8,6 +8,7 @@ import Navbar from "../pages/shared/Navbar";
 import Register from "../pages/Register/Register";
 import SignIn from "../pages/SignIn";
 import JobDetails from "../pages/JobDetails";
+import Private from "../pages/Private/Private";
 
   const router = createBrowserRouter([
     {
@@ -21,7 +22,7 @@ import JobDetails from "../pages/JobDetails";
         },
         {
           path: '/jobs/:id',
-          element: <JobDetails></JobDetails>,
+          element: <Private><JobDetails></JobDetails></Private>,
           loader: ({params}) => fetch(`http://localhost:5000/works/${params.id}`)
         },
         {
