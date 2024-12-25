@@ -1,10 +1,12 @@
 import React, { useContext } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { AuthContext } from "../Provider/AuthProvider";
+import Swal from "sweetalert2";
 
 const ApplyJob = () => {
   const { id } = useParams();
   const { user } = useContext(AuthContext);
+  const navigate = useNavigate()
   //   console.log(id,user);
   const submitApplication = (e) => {
     e.preventDefault();
@@ -29,7 +31,16 @@ const ApplyJob = () => {
     })
     .then(res => res.json())
     .then(data => {
-        console.log(data)
+        if(data.insertedId){
+            Swal.fire({
+                position: "top",
+                icon: "success",
+                title: "Your work has been saved",
+                showConfirmButton: false,
+                timer: 1500
+              });
+        }
+        navigate('/myApplications')
     })
   };
   return (
