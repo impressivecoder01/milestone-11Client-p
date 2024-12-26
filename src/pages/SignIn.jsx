@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import lottieSingInAnimation from "../../src/assets/LottieLogin/Animation - 1734564332865.json";
 import Lottie from "lottie-react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../Provider/AuthProvider";
 const SignIn = () => {
   const navigate = useNavigate()
@@ -87,6 +87,9 @@ const SignIn = () => {
               </form>
               <div className="pb-3">
                 <button onClick={handleSocialSignIn} className="btn btn-warning">Google SignIn</button>
+              </div>
+              <div>
+                <p>Didn't Sign In yet! <br /> <Link to='/register'>Register Here</Link></p>
               </div>
             </div>
           </div>

@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import { AuthContext } from "../Provider/AuthProvider";
 
 const AddJob = () => {
   const navigate = useNavigate();
+  const {user} = useContext(AuthContext)
   const handleAddJob = (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
@@ -208,6 +210,21 @@ const AddJob = () => {
               type="email"
               placeholder="HR Email"
               name="hr_email"
+              defaultValue={user?.email}
+              className="input input-bordered"
+              required
+            />
+          </div>
+          {/* application deadline */}
+          <div className="form-control">
+            <label className="label">
+              <span className="label-text">Deadline</span>
+            </label>
+            <input
+              type="date"
+              placeholder="Deadline"
+              name="applicationDeadline"
+              
               className="input input-bordered"
               required
             />

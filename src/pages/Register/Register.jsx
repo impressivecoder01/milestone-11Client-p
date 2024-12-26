@@ -2,7 +2,7 @@ import Lottie from "lottie-react";
 import React, { useContext } from "react";
 import registerLottieData from "../../assets/Lottiefiles/Animation - 1734550880947.json";
 import { AuthContext } from "../../Provider/AuthProvider";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 const Register = () => {
   const { createUser, setUser, updateUserProfile } = useContext(AuthContext);
   const navigate = useNavigate();
@@ -105,16 +105,13 @@ const Register = () => {
                   className="input input-bordered"
                   required
                 />
-                <label className="label">
-                  <a href="#" className="label-text-alt link link-hover">
-                    Forgot password?
-                  </a>
-                </label>
+                
               </div>
               <div className="form-control mt-6">
                 <button className="btn btn-primary">Register</button>
               </div>
             </form>
+            <Link to='/login'>Login Here</Link>
           </div>
         </div>
       </div>
