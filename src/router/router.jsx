@@ -65,7 +65,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: '/viewApplications/:job_id',
+        path: '/viewApplications/:job_id',  //
         element: <Private><ViewApplications></ViewApplications></Private>,
         loader: ({params}) => fetch(`http://localhost:5000/job-applications/jobs/${params.job_id}`)
       },

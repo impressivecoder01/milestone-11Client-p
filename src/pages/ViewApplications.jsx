@@ -22,8 +22,8 @@ const ViewApplications = () => {
                     <th>Favorite Color</th>
                     <th></th>
                   </tr>)
-            }
-           
+            
+          }
           </thead>
           <tbody>
             {/* row 1 */}
@@ -61,7 +61,7 @@ const ViewApplications = () => {
                 <button className="btn btn-ghost btn-xs">details</button>
               </th>
             </tr>
-           
+          
            
            
           </tbody>
